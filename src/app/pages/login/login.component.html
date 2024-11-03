@@ -1,0 +1,28 @@
+<div class="card-container">
+  <mat-card>
+      <mat-card-header>
+          <mat-card-title>LOG IN</mat-card-title>
+      </mat-card-header>
+      <mat-card-content>
+          <form class="form-custom" [formGroup]="formLogin" (ngSubmit)="iniciarSesion()">
+              <!-- Campo de Usuario -->
+              <mat-form-field class="input-custom">
+                  <mat-label>Usuario</mat-label>
+                  <input matInput type="text" placeholder="Escribe tu usuario" formControlName="usuario">
+              </mat-form-field>
+              
+              <!-- Campo de Contraseña -->
+              <mat-form-field class="input-custom">
+                  <mat-label>Password</mat-label>
+                  <input matInput type="password" placeholder="Password" formControlName="password">
+              </mat-form-field>
+              
+              <!-- Botones de acción -->
+              <div class="flex">
+                  <button mat-flat-button color="primary" type="submit">Iniciar Sesión</button>
+                  <button mat-flat-button color="warn" (click)="linktoregister()" style="margin-left: 8px;">Register</button>
+              </div>
+          </form>
+      </mat-card-content>
+  </mat-card>
+</div>
