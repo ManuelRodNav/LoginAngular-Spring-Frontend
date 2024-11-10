@@ -21,6 +21,7 @@ import {MatButtonModule} from '@angular/material/button';
   styleUrl: './login.component.css'
 })
 export class LoginComponent {
+ private   tokentoshow="";
 private accesoservice= inject(AccesoService)
 private router= inject(Router)
 private formBuild= inject(FormBuilder)
@@ -34,17 +35,19 @@ linktoregister(){
 this.router.navigate(["register"])
 }
 iniciarSesion(): void {
+  
   if (this.formLogin.invalid) {
     return console.log("Ocurrio un error con el formulario");
   }
   
   const objeto: Login = {
-    usuario: this.formLogin.value.usuario,
+    username: this.formLogin.value.usuario,
     password: this.formLogin.value.password
   };
   
   this.accesoservice.Login(objeto).subscribe({
     next: (data) => {
+      this.tokentoshow= data.token
       if (data.token.length>1) {  
         console.log("Token recibido:", data.token);
         localStorage.setItem("token", data.token);
@@ -54,6 +57,7 @@ iniciarSesion(): void {
       }
     },
     error: (error) => {
+      console.log(this.tokentoshow)
       console.error("Error en el login:", error); // Muestra el objeto completo
       console.log("usuario:", this.formLogin.value.usuario, "Contraseña:", this.formLogin.value.password);
       
