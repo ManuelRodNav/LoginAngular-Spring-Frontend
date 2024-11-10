@@ -7,6 +7,7 @@ import {MatCardModule} from '@angular/material/card';
 import {MatFormFieldModule} from '@angular/material/form-field';
 import {MatInputModule} from '@angular/material/input';
 import {MatButtonModule} from '@angular/material/button';
+
 @Component({
   selector: 'app-register',
   standalone: true,
@@ -41,14 +42,21 @@ export class RegisterComponent {
     
     this.accessService.registrarse(user).subscribe({
       next: (data) => {
-        if (data.isSucces) {
+        if (data.token.length>1) {
           this.router.navigate([""]);
         } else {
           alert("No se pudo registrar correctamente");
+         
         }
       },
       error: (error) => {
-        console.log("Ha ocurrido un error: " + error);
+        
+        console.log("usuario:", this.FormRegister.value.usuario, "Contraseña:", this.FormRegister.value.password);
+        
+        // Opcionalmente, muestra propiedades específicas
+        console.log("Error Status:", error.status);
+        console.log("Error Message:", error.message);
+        console.log("Error Details:", error.error);
       }
     });
   }

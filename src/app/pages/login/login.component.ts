@@ -33,30 +33,35 @@ public formLogin:FormGroup= this.formBuild.group({
 linktoregister(){
 this.router.navigate(["register"])
 }
-iniciarSesion(){
-  if(this.formLogin.invalid){
-    return ;
+iniciarSesion(): void {
+  if (this.formLogin.invalid) {
+    return console.log("Ocurrio un error con el formulario");
   }
-  const objeto:Login={
+  
+  const objeto: Login = {
     usuario: this.formLogin.value.usuario,
     password: this.formLogin.value.password
-  }
+  };
+  
   this.accesoservice.Login(objeto).subscribe({
-    next:(data)=>{
-      if(data.isSucces){
-        console.log(data.token
-        )
-        localStorage.setItem("token", data.token)
-        this.router.navigate(["Home"])
+    next: (data) => {
+      if (data.token.length>1) {  
+        console.log("Token recibido:", data.token);
+        localStorage.setItem("token", data.token);
+        this.router.navigate(["Home"]);
+      } else {
+        alert("Credenciales no válidas");
       }
-      else{
-        alert("Credenciales no validas")
-      }
-      
     },
-    error:(error)=>{
-      console.log(error + "usuario:" + this.formLogin.value.usuario + " Contraseña:" + this.formLogin.value.password  )
+    error: (error) => {
+      console.error("Error en el login:", error); // Muestra el objeto completo
+      console.log("usuario:", this.formLogin.value.usuario, "Contraseña:", this.formLogin.value.password);
+      
+      // Opcionalmente, muestra propiedades específicas
+      console.log("Error Status:", error.status);
+      console.log("Error Message:", error.message);
+      console.log("Error Details:", error.error);
     }
-  })
+  });
 }
 }
