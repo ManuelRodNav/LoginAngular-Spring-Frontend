@@ -49,9 +49,10 @@ iniciarSesion(): void {
     next: (data) => {
       this.tokentoshow= data.token
       if (data.token.length>1) {  
-        console.log("Token recibido:", data.token);
+        
         localStorage.setItem("token", data.token);
         this.router.navigate(["Home"]);
+        alert("Token:" +  data.token )
       } else {
         alert("Credenciales no válidas");
       }

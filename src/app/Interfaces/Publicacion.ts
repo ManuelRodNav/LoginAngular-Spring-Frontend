@@ -1,5 +1,5 @@
 export interface Publicacion {
-  id: 1;
+  id: bigint;
   titulo: string;
   descripcion: string;
   contenido: string;
