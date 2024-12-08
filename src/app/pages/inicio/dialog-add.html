@@ -1,0 +1,19 @@
+<h1 mat-dialog-title>Editar Publicación</h1>
+<div mat-dialog-content>
+  <mat-form-field>
+    <mat-label>Título</mat-label>
+    <input matInput [(ngModel)]="data.titulo">
+  </mat-form-field>
+  <mat-form-field>
+    <mat-label>Descripción</mat-label>
+    <input matInput [(ngModel)]="data.descripcion">
+  </mat-form-field>
+  <mat-form-field>
+    <mat-label>Contenido</mat-label>
+    <textarea matInput [(ngModel)]="data.contenido"></textarea>
+  </mat-form-field>
+</div>
+<div mat-dialog-actions>
+  <button mat-button (click)="onNoClick()">Cancelar</button>
+  <button mat-button [mat-dialog-close]="data">Guardar</button>
+</div>
